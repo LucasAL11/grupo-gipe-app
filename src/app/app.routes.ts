@@ -8,16 +8,22 @@ export const routes: Routes = [
         pathMatch: 'full'
     },
     {
-        path: 'home', 
+        path: 'home',
         loadComponent: () => import('home').then(m => m.HomeComponent)
     },
     {
-        path: 'users', 
-        loadComponent: () => import('users').then(m => m.UsersComponent)
+        path: 'users',
+        loadComponent: () => import('users').then(m => m.UsersComponent),
+        children: [
+            {
+                path: ":id",
+                loadComponent: () => import('users').then((c) => c.UserDetailComponent)
+            }
+        ]
     },
     {
-        path: 'security', 
-        loadComponent : () => import('security').then(m => m.SecurityComponent)
+        path: 'security',
+        loadComponent: () => import('security').then(m => m.SecurityComponent)
     },
 
 ];
